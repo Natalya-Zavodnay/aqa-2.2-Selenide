@@ -47,7 +47,7 @@ class RegistrationTest {
         $("[data-test-id=phone] input").setValue("+79999999999");
         $(".checkbox__box").click();
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Доставка в выбранный город недоступна"));
+        $("[data-test-id='city'].input_invalid .input__sub").shouldHave(text("Доставка в выбранный город недоступна"));
     }
 
 
@@ -62,7 +62,7 @@ class RegistrationTest {
         $("[data-test-id=phone] input").setValue("+79999999999");
         $(".checkbox__box").click();
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
+        $("[data-test-id=name].input_invalid .input__sub").shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
     @Test
@@ -76,7 +76,7 @@ class RegistrationTest {
         $("[data-test-id=phone] input").setValue("+7999-999-99-99");
         $(".checkbox__box").click();
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
+        $("[data-test-id=phone].input_invalid .input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
     @Test
@@ -103,7 +103,7 @@ class RegistrationTest {
         $("[data-test-id=name] input").setValue("Петров Сергей");
         $("[data-test-id=phone] input").setValue("");
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
+        $("[data-test-id=phone].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -116,7 +116,7 @@ class RegistrationTest {
         $("[data-test-id=name] input").setValue("");
         $("[data-test-id=phone] input").setValue("+79999999999");
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
+        $("[data-test-id=name].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
     }
 
 
@@ -127,7 +127,7 @@ class RegistrationTest {
         SelenideElement data = $("[data-test-id=date]");
         data.$("[value]").doubleClick().sendKeys(Keys.BACK_SPACE);
         data.$("[placeholder]").setValue(inputDate);
-        $("[data-test-id=name] input").setValue("");
+        $("[data-test-id=name] input").setValue("Петров Сергей");
         $("[data-test-id=phone] input").setValue("+79999999999");
         $$("button").find(exactText("Забронировать")).click();
         $(".input_invalid .input__sub").shouldHave(text("Заказ на выбранную дату невозможен"));
